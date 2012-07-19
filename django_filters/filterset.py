@@ -198,6 +198,7 @@ if hasattr(models, "XMLField"):
 
 class BaseFilterSet(object):
     filter_overrides = {}
+    force_multiple_value_lookup = []
 
     def __init__(self, data=None, queryset=None, prefix=None):
         self.is_bound = data is not None
@@ -227,6 +228,8 @@ class BaseFilterSet(object):
                     else:
                         data = self.form.initial.get(name, self.form[name].field.initial)
                     val = self.form.fields[name].clean(data)
+                    if name in self.force_multiple_value_lookup:
+                        val = self.data.getlist(name)
                     qs = filter_.filter(qs, val)
                 except forms.ValidationError:
                     pass

@@ -12,7 +12,8 @@ __all__ = [
     'MultipleChoiceFilter', 'DateFilter', 'DateTimeFilter', 'TimeFilter',
     'ModelChoiceFilter', 'ModelMultipleChoiceFilter', 'NumberFilter',
     'RangeFilter', 'DateRangeFilter', 'AllValuesFilter',
-    'OpenRangeNumericFilter', 'OpenRangeDateFilter', 'OpenRangeTimeFilter'
+    'OpenRangeNumericFilter', 'OpenRangeDateFilter', 'OpenRangeTimeFilter',
+    'MultipleValueFilter'
 ]
 
 LOOKUP_TYPES = sorted(QUERY_TERMS.keys())
@@ -78,6 +79,19 @@ class BooleanFilter(Filter):
 
 class ChoiceFilter(Filter):
     field_class = forms.ChoiceField
+
+
+class MultipleValueFilter(Filter):
+    """
+    This filter allows the look up of multiple values for a field which contains only 1 chocie
+    """
+    def filter(self, qs, value):
+        value = value or ()
+        q = Q()
+        for v in value:
+            q |= Q(**{self.name: v})
+        return qs.filter(q).distinct()
+
 
 class MultipleChoiceFilter(Filter):
     """
