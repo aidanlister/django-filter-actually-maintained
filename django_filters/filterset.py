@@ -228,7 +228,7 @@ class BaseFilterSet(object):
                     else:
                         data = self.form.initial.get(name, self.form[name].field.initial)
                     val = self.form.fields[name].clean(data)
-                    if name in self.force_multiple_value_lookup:
+                    if name in self.force_multiple_value_lookup and name in self.data:
                         val = self.data.getlist(name)
                     qs = filter_.filter(qs, val)
                 except forms.ValidationError:
