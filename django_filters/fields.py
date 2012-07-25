@@ -28,6 +28,9 @@ class NumericRangeField(BaseRangeField):
 class DateRangeField(BaseRangeField):
     form_class = forms.DateField
 
+class DateTimeRangeField(BaseRangeField):
+    form_class = forms.DateTimeField
+
 class TimeRangeField(BaseRangeField):
     form_class = forms.TimeField
 

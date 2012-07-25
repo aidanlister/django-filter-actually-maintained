@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.db.models.sql.constants import QUERY_TERMS
 from django.utils.translation import ugettext_lazy as _
 
-from django_filters.fields import NumericRangeField, DateRangeField, TimeRangeField, LookupTypeField
+from django_filters.fields import NumericRangeField, DateRangeField, TimeRangeField, DateTimeRangeField, LookupTypeField
 
 __all__ = [
     'Filter', 'CharFilter', 'BooleanFilter', 'ChoiceFilter',
@@ -13,7 +13,7 @@ __all__ = [
     'ModelChoiceFilter', 'ModelMultipleChoiceFilter', 'NumberFilter',
     'RangeFilter', 'DateRangeFilter', 'AllValuesFilter',
     'OpenRangeNumericFilter', 'OpenRangeDateFilter', 'OpenRangeTimeFilter',
-    'MultipleValueFilter'
+    'MultipleValueFilter', 'OpenRangeDateTimeFilter'
 ]
 
 LOOKUP_TYPES = sorted(QUERY_TERMS.keys())
@@ -198,3 +198,6 @@ class OpenRangeDateFilter(BaseOpenRangeFilter):
 
 class OpenRangeTimeFilter(BaseOpenRangeFilter):
     field_class = TimeRangeField
+
+class OpenRangeDateTimeFilter(BaseOpenRangeFilter):
+    field_class = DateTimeRangeField

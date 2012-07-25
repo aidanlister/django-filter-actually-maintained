@@ -64,9 +64,9 @@ class LinkWidget(forms.Widget):
         return '<li><a%(attrs)s href="?%(query_string)s">%(label)s</a></li>'
 
 class RangeWidget(forms.MultiWidget):
-    def __init__(self, attrs=None):
-        widgets = (forms.TextInput(attrs=attrs), forms.TextInput(attrs=attrs))
-        super(RangeWidget, self).__init__(widgets, attrs)
+    def __init__(self, attrs0=None, attrs1=None):
+        widgets = (forms.TextInput(attrs=attrs0), forms.TextInput(attrs=attrs1))
+        super(RangeWidget, self).__init__(widgets, None)
 
     def decompress(self, value):
         if value:
@@ -74,7 +74,7 @@ class RangeWidget(forms.MultiWidget):
         return [None, None]
 
     def format_output(self, rendered_widgets):
-        return u'-'.join(rendered_widgets)
+        return u'</li><li>'.join(rendered_widgets)
 
 class LookupTypeWidget(forms.MultiWidget):
     def decompress(self, value):
