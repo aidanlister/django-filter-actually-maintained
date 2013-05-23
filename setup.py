@@ -5,7 +5,7 @@ readme = f.read()
 f.close()
 
 setup(
-    name='django-filter',
+    name='fool-django-filter',
     version='0.5.5',
     description='Django-filter is a reusable Django application for allowing users to filter queryset dynamically.',
     long_description=readme,
