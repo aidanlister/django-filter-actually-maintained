@@ -16,7 +16,7 @@ __all__ = [
     'MultipleValueFilter', 'OpenRangeDateTimeFilter'
 ]
 
-LOOKUP_TYPES = sorted(QUERY_TERMS.keys())
+LOOKUP_TYPES = sorted(QUERY_TERMS)
 
 class Filter(object):
     creation_counter = 0

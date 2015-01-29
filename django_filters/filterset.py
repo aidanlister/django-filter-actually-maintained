@@ -4,7 +4,7 @@ from django import forms
 from django.db import models
 from django.db.models.fields import FieldDoesNotExist
 from django.db.models.related import RelatedObject
-from django.db.models.sql.constants import LOOKUP_SEP
+from django_filters.compat import LOOKUP_SEP
 from django.utils.datastructures import SortedDict
 from django.utils.text import capfirst
 
@@ -272,7 +272,8 @@ class BaseFilterSet(object):
     @classmethod
     def filter_for_field(cls, f, name):
         filter_for_field = dict(FILTER_FOR_DBFIELD_DEFAULTS, **cls.filter_overrides)
-
+        if hasattr(f, 'field'):
+            f = f.field
         default = {
             'name': name,
             'label': capfirst(f.verbose_name)
