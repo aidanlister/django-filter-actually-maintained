@@ -3,7 +3,7 @@ from copy import deepcopy
 from django import forms
 from django.db import models
 from django.db.models.fields import FieldDoesNotExist
-from django.db.models.related import RelatedObject
+#from django.db.models.related import RelatedObject
 from django_filters.compat import LOOKUP_SEP
 from django.utils.datastructures import SortedDict
 from django.utils.text import capfirst
@@ -43,7 +43,7 @@ def get_model_field(model, f):
             rel = opts.get_field_by_name(name)[0]
         except FieldDoesNotExist:
             return None
-        if isinstance(rel, RelatedObject):
+        if rel.is_relation:
             model = rel.model
             opts = rel.opts
         else:
